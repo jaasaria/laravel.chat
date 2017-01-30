@@ -1,0 +1,48 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+
+
+//sidebar
+.sidebar .nav > li.active-pro {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+}    
+.user .photo, .off-canvas-sidebar .user .photo {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+.user .photo img, .off-canvas-sidebar .user .photo img {
+    width: 100%;
+}  
+
+
+// .sidebar .nav > li.active-pro {
+//     position: absolute;
+//     width: 100%;
+//     bottom: 10px;
+// }    
+// .sidebar .user .photo, .off-canvas-sidebar .user .photo {
+//     width: 80px;
+//     height: 80px;
+//     overflow: hidden;
+//     border-radius: 50%;
+//     margin: 0 auto;
+//     box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+// }
+// .sidebar .user .photo img, .off-canvas-sidebar .user .photo img {
+//     width: 100%;
+// }    
