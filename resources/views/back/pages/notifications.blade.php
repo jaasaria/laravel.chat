@@ -50,11 +50,11 @@
 
  @foreach ($noti as $value)
 
-    <div class="list-group">
+    {{-- <div class="list-group">
       <a href=" {{ url('/notifications/info' , $value->id ) }} " class="list-group-item">
         <div class="list-photo pull-left">
           <div class="avatar">
-            <img src="/assets/img/faces/avatar.jpg">
+            <img src="/upload/notification.jpg">
           </div>
         </div>
         <div class="list-details">
@@ -68,11 +68,33 @@
             <p> {{ $value->description }} </p>              
         </div>
       </a>
+    </div> --}}
+
+
+    <div class="list-group">
+      <a href=" " class="list-group-item">
+        <div class="list-photo pull-left">
+          <div class="avatar">
+            <img src="/upload/notification.jpg">
+          </div>
+        </div>
+        <div class="list-details">
+
+
+              <i class="fa fa-bell pull-left" style="margin: 5px"></i>
+              <h4 class="list-group-item-heading">{{ $value->data['title'] }}</h4>
+
+            
+            <p> {{ $value->data['description'] }} </p>              
+        </div>
+      </a>
     </div>
+
+
 
   @endforeach
 
-  {{ $noti->appends(request()->input())->links()  }}
+  {{-- {{ $noti->appends(request()->input())->links()  }} --}}
 
 
 </div>

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class tblNotification extends Model
 {
 
-	protected  $table = 'tbl_notifications';
-    protected  $fillable = ['title','description','avatar','stat','slug'];
+	protected  $table = 'tbl_noti';
+    protected  $fillable = ['title','description','avatar','stat','slug','with_email'];
 
 }
 

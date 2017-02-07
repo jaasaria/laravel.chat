@@ -16,12 +16,13 @@ class NotificationTableSeeder extends Seeder
         $limit = 50;
         for ($i = 0; $i < $limit; $i++) {
             
-            DB::table('tbl_notifications')->insert([
+            DB::table('tbl_noti')->insert([
                 'title' => $faker->name,
 	            'slug' => str_slug($faker->name),
 	            'description' => $faker->text($maxNbChars = 200),
                 'avatar' => 'default.jpg',
-	            'stat' => '0',
+                'stat' => '0',
+	            'with_email' => '1',
                 'created_at' => Carbon::now(),
 	        ]);
         }

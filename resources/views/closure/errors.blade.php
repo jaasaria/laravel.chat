@@ -1,5 +1,5 @@
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
+    <div class="alert alert-warning">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
         <ul>

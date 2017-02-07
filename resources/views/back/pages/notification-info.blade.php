@@ -24,6 +24,13 @@
   <br>
   <p> {{ $noti->description }} </p>   
 
+
+  <br>
+
+	<div class="col-md-4 col-md-offset-4">
+		<a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
+	</div>
+
 </div>
 
 
