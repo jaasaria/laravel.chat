@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\tblNotification;
 use App\Models\tblNoti;
-
+use App\User;
 use App\Notifications\NewsNoti;
 use Auth;
 use Notification;
@@ -20,41 +20,37 @@ class PagesController extends Controller
         return view('back.pages.dashboard',compact('pageTitle'));
     }
 
-    public function profile(){
-        $pageTitle = "Profile";
-        return view('back.pages.profile',compact('pageTitle'));
-    }
-
     public function messages(){
         $pageTitle = "Messages";
         return view('back.pages.messages',compact('pageTitle'));
     }
 
-
     public function notifications(Request $request){
 
         $searchBy = $request->get('filter');
 
-        if($searchBy == '0'){   //unread
-            $noti = tblNoti::whereStat(0)->orderBy('id', 'desc')->paginate(5);    
+        if($searchBy == '0'){ //unread
+            $noti =  Auth::user()->noti()
+                    ->whereNull('read_at')
+                    ->orderBy('created_at', 'asc')
+                    ->paginate(5);          
         }
-        else{                   //all
-            $noti = tblNoti::orderBy('id', 'create_at')->paginate(5);    
-            // $noti = tblNotification::orderBy('id', 'desc')->paginate(5);    
-            $res =  Auth::user()->notifications;
+        else{ //all
+            $noti =  Auth::user()->noti()->orderBy('created_at', 'desc')->paginate(5);
+        }
 
-            $noti = $res;    
-        }
         $pageTitle = "Notifications";
         return view('back.pages.notifications',compact('pageTitle','noti'));
     }
 
-    public function notificationinfo($id){
+    public function notificationinfo($data){
+
         $pageTitle = "Notifications";
-        $noti = tblNotification::findOrFail($id);
-        if($noti->stat != '1'){
-            $noti->stat = 1;
-            $noti->save();
+        $noti = tblNoti::findOrFail($data);
+
+        // update for the user notification
+        if($noti->unread()){
+            $noti->markAsRead();
         }
         return view('back.pages.notification-info',compact('pageTitle','noti'));
     }    
@@ -66,36 +62,15 @@ class PagesController extends Controller
 
     public function notificationNewsUnread(){
 
-        // return Auth::user()->unreadNotifications;
-        // $res =  tblNotification::whereStat('0')->get();
-
-
-        $res =  Auth::user()->notifications;
+        $res =  Auth::user()->unreadNotifications;
         return $res;
 
     }  
 
     public function notificationNewsDropdown(){
-        $res =  tblNotification::limit(5)->orderBy('id', 'desc')->get();
+        $res = Auth::user()->noti()->limit(5)->orderBy('created_at', 'desc')->get();
         return $res;
     }  
-
-    public function notificationMarkAsRead(){
-
-        // $res =  tblNotification::limit(5)->orderBy('id', 'desc')->get();
-        // return $res;
-
-        $user = Auth::user();
-
-        foreach ($user->unreadNotifications as $notification) {
-            $notification->markAsRead();
-        }
-
-        return "true";
-
-
-    }  
-
 
     public function notificationPost(Request $request){
 
@@ -116,15 +91,16 @@ class PagesController extends Controller
             'stat' => '0'
         ));
 
-        //notification
-        $user = auth::user(); //should be all users
-        // $user->notify(new notification($noti));
+        //should be in event to reduce the interval
+        $users = User::get();
+        foreach ($users as $user) {
+            Notification::send($user, new NewsNoti($noti));
+        }
 
-        Notification::send($user, new NewsNoti($noti));
-
-        return redirect()->back()->with('success',' Record was successfully saved.');
+        return back()->with('success',' Record was successfully saved.');
 
     }
+
     public function settings(){
         $pageTitle = "Settings";
         return view('back.pages.settings',compact('pageTitle'));

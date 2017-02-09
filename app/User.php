@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','middlename', 'lastname', 'job','about','avatar',
     ];
 
     protected $hidden = [
@@ -20,7 +20,11 @@ class User extends Authenticatable
 
     public function noti()
     {
-        return $this->hasMany(tblNoti::class,'id');
+        return $this->hasMany('App\Models\tblNoti','notifiable_id');
+    }
+
+    public function getFullNameAttribute() {
+        return ucwords($this->name) . ' ' . ucwords($this->middlename). ' ' . ucwords($this->lastname);
     }
 
 

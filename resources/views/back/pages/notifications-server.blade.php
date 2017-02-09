@@ -6,7 +6,7 @@
 	{{ $pageTitle }}		
 @stop
 @section('content-subtitle')
-	@include('closure.errors')
+	For Demo: This feature is for admin only. 
 @stop
 
 @section('css')
@@ -15,7 +15,11 @@
 @section('content-content')
 
 
+
+
 	<div class="col-md-6 col-md-offset-3">
+
+		@include('closure.errors')
 
 		<form class="form-horizontal" role="form" method="POST" action="{{ url('/notifications/server/') }}">
 			
@@ -32,9 +36,11 @@
 			</div>
 			<div class="checkbox ">
 				<label>
-				  <input type="checkbox" name="email" {{ old('email') ? 'checked' : '' }} checked>
-				  With Email?
+				  <input type="checkbox" name="email" {{ old('email') ? 'checked' : '' }} unchecked>
+				  With Email? 
 				</label>
+				<br>
+				<small>Please uncheck if error persist. SMPT server may not configure.</small>
 			</div>
 			<br>
 

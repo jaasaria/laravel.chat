@@ -1,5 +1,4 @@
 @extends('back.layouts.admin')
-
 @section('header-title')
 	{{ $pageTitle }}		
 @stop
@@ -9,14 +8,18 @@
 @section('content-subtitle')
 	View application Events,News and Update
   <div class="pull-right">
-    <small> <a href=" {{ url('notifications?filter=0') }}"><i class="fa fa-bell pull-left" style="margin: 5px"></i>Show Unread Notification</a></small>
-    
+
+
+    @if ( Request::has('filter'))
+      <small> <a href=" {{ url('notifications') }}"><i class="fa fa-bell pull-left" style="margin: 5px"></i>Show All Notification</a></small>
+    @else
+      <small> <a href=" {{ url('notifications?filter=0') }}"><i class="fa fa-bell pull-left" style="margin: 5px"></i>Show Unread Notification</a></small>
+    @endif
+
   </div>
-  
 @stop
 
 @section('css')
-
  <style>
   .list-photo  .avatar{
     width: 50px;
@@ -33,46 +36,34 @@
     margin-bottom: 10px;
   }
   .bell-red{
-    color:red;
+    color: #ce4242;
   }
   .list-details .bell-red h4{
-    color:red;
+    color: #ce4242;
+    font-weight: 500;
   }
-
  </style>
-
 @stop
 
 @section('content-content')
-
 <div class="col-md-10 col-md-offset-1 ">
   
 
+
+@if ($noti->count() ==0)
+  <div class="list-group text-center"> 
+    <h3>No Record Found</h3>
+  </div>
+@endif
+
+
+
+
  @foreach ($noti as $value)
 
-    {{-- <div class="list-group">
-      <a href=" {{ url('/notifications/info' , $value->id ) }} " class="list-group-item">
-        <div class="list-photo pull-left">
-          <div class="avatar">
-            <img src="/upload/notification.jpg">
-          </div>
-        </div>
-        <div class="list-details">
-
-        
-            <div class="{{ $value->stat  == '0' ? 'bell-red':'' }}">
-              <i class="fa fa-bell pull-left" style="margin: 5px"></i>
-              <h4 class="list-group-item-heading">{{ $value->title }}</h4>
-            </div>
-            
-            <p> {{ $value->description }} </p>              
-        </div>
-      </a>
-    </div> --}}
-
-
     <div class="list-group">
-      <a href=" " class="list-group-item">
+      <a href=" {{ url('/notifications/info' ,  $value->id  ) }} " class="list-group-item">
+  
         <div class="list-photo pull-left">
           <div class="avatar">
             <img src="/upload/notification.jpg">
@@ -80,26 +71,21 @@
         </div>
         <div class="list-details">
 
-
-              <i class="fa fa-bell pull-left" style="margin: 5px"></i>
-              <h4 class="list-group-item-heading">{{ $value->data['title'] }}</h4>
-
+              <div class="{{  $value->read_at == null ? 'bell-red':'' }}">
+                <i class="fa fa-bell pull-left" style="margin: 5px"></i>
+                <h4 class="list-group-item-heading">{{ $value->data['title']  }}</h4>
+              </div>
             
             <p> {{ $value->data['description'] }} </p>              
         </div>
       </a>
     </div>
 
-
-
   @endforeach
 
-  {{-- {{ $noti->appends(request()->input())->links()  }} --}}
-
+  {{ $noti->appends(request()->input())->links()  }}
 
 </div>
-
-
 
 @stop
 

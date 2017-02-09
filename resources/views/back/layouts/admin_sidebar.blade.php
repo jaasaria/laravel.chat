@@ -9,10 +9,10 @@
 
   <div class="user" style="margin-top: 10px">
       <div class="photo">
-          <img src="/assets/img/faces/avatar.jpg">
+          <img src="{{ asset('/upload/avatars/' . Auth::user()->avatar ) }}">
       </div>
       <div class="info text-center" style="margin-top: 5px">
-          {{ ucwords(auth::user()->name)}}
+          {{ ucwords(auth::user()->fullname)}}
       </div>
   </div>
 
@@ -30,12 +30,12 @@
               <p>User Profile</p>
           </a>
       </li>
-      <li class="{{ Request::is('messages') ? 'active' : '' }}">
+{{--       <li class="{{ Request::is('messages') ? 'active' : '' }}">
           <a href="{{ url('messages') }}">
               <i class="material-icons">content_paste</i>
               <p>Messages</p>
           </a>
-      </li>
+      </li> --}}
 
       <li class="{{ Request::is('notifications/*','notifications') ? 'active' : '' }}">
           <a href="{{ url('notifications') }}">

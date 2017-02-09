@@ -3,16 +3,23 @@
 	<li class="dropdown">
 	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	          <i class="material-icons">notifications</i>
-	          <span class="notification">{{ all_nots_count }}</span>
+	          <span class="notification" v-if="all_nots_count">{{ all_nots_count }}</span>
 	          <p class="hidden-lg hidden-md">Notifications</p>
 	        </a>
 	        <ul class="dropdown-menu">
 
-            <li v-for="li in list" v-bind:class="{'unread-noti': li.stat == '0' }">
-              <a :href ="'/notifications/info/' +  li.id " >{{ li.title }}</a>              
+
+            <li v-for="li in list">
+              <a v-bind:class="{'unread-noti': !li.read_at }" :href ="'/notifications/info/' +  li.id " >{{ li.data['title'] }}</a>              
             </li>
 
-	          <li class="text-center" style="background-color: #f7eef7"><a href="/notifications">-- View All --</a></li>
+            <li v-if="all_nots_count" class="text-center" style="background-color: #f7eef7"><a href="/notifications">-- View All 
+            --</a></li>       
+
+            <li v-else class="text-center" style="background-color: #f7eef7"><a>-- No Record Found 
+            --</a></li>       
+
+          
 	        </ul>
 	</li>
 
@@ -91,8 +98,8 @@
 
 <style>
     .unread-noti{
-        font-weight: bold !important;
-        /*color:red !important;*/
+        color: #ce4242 !important;
+        font-weight: 550 !important;
     }
 </style>
 

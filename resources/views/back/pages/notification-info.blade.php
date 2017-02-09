@@ -20,9 +20,9 @@
 <div class="col-md-10 col-md-offset-1 ">
   
   <br>
-  <h4 class="list-group-item-heading">{{ $noti->title }}</h4>
+  <h4 class="list-group-item-heading">{{ $noti->data['title'] }}</h4>
   <br>
-  <p> {{ $noti->description }} </p>   
+  <p>{!! $noti->data['description'] !!}</p>   
 
 
   <br>

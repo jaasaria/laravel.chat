@@ -10451,6 +10451,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 // import Dropdown from './Dropdown.vue' // 
@@ -42938,25 +42945,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "material-icons"
-  }, [_vm._v("notifications")]), _vm._v(" "), _c('span', {
+  }, [_vm._v("notifications")]), _vm._v(" "), (_vm.all_nots_count) ? _c('span', {
     staticClass: "notification"
-  }, [_vm._v(_vm._s(_vm.all_nots_count))]), _vm._v(" "), _c('p', {
+  }, [_vm._v(_vm._s(_vm.all_nots_count))]) : _vm._e(), _vm._v(" "), _c('p', {
     staticClass: "hidden-lg hidden-md"
   }, [_vm._v("Notifications")])]), _vm._v(" "), _c('ul', {
     staticClass: "dropdown-menu"
   }, [_vm._l((_vm.list), function(li) {
-    return _c('li', {
+    return _c('li', [_c('a', {
       class: {
-        'unread-noti': li.stat == '0'
-      }
-    }, [_c('a', {
+        'unread-noti': !li.read_at
+      },
       attrs: {
         "href": '/notifications/info/' + li.id
       }
-    }, [_vm._v(_vm._s(li.title))])])
-  }), _vm._v(" "), _vm._m(0)], 2)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
+    }, [_vm._v(_vm._s(li.data['title']))])])
+  }), _vm._v(" "), (_vm.all_nots_count) ? _c('li', {
     staticClass: "text-center",
     staticStyle: {
       "background-color": "#f7eef7"
@@ -42965,8 +42969,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "/notifications"
     }
-  }, [_vm._v("-- View All --")])])
-}]}
+  }, [_vm._v("-- View All \n            --")])]) : _c('li', {
+    staticClass: "text-center",
+    staticStyle: {
+      "background-color": "#f7eef7"
+    }
+  }, [_c('a', [_vm._v("-- No Record Found \n            --")])])], 2)])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -43876,7 +43885,7 @@ exports = module.exports = __webpack_require__(46)();
 
 
 // module
-exports.push([module.i, "\n.unread-noti{\n    font-weight: bold !important;\n    /*color:red !important;*/\n}\n", ""]);
+exports.push([module.i, "\n.unread-noti{\n    color: #ce4242 !important;\n    font-weight: 550 !important;\n}\n", ""]);
 
 // exports
 

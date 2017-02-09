@@ -82,7 +82,7 @@
               <small>
                   <a href="">Register?</a>
                   <br>
-                  <a href="">Forget Password?</a>    
+                  {{-- <a href="">Forget Password?</a>     --}}
               </small>   
               <br>
           </div>

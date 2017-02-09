@@ -11,34 +11,53 @@
 
 @section('content-content')
 
+
 	<div class="col-lg-6 col-md-6 col-sm-6">
 		<div class="card card-stats">
-			<div class="card-header" data-background-color="orange">
-				<i class="material-icons">content_copy</i>
-			</div>
+			<a href=" {{ url('notifications') }}">
+				<div class="card-header" data-background-color="orange">
+					<i class="material-icons">content_copy</i>
+				</div>
+			</a>
+
 			<div class="card-content">
-				<p class="category">Unread Messages</p>
-				<h3 class="title">9<small>Message</small></h3>
+				<p class="category">All Notification</p>
+
+				@if ($count_noti)
+					<h3 class="title">{{ $count_noti }}<small> Notification</small></h3>
+				@else
+					<h3 class="title"><small>No Record Found</small></h3>
+				@endif
+
 			</div>
 			<div class="card-footer">
 				<div class="stats">
-					<i class="material-icons">warning</i> <a href="#pablo">View Message...</a>
+					<i class="material-icons">warning</i> <a href="{{ url('notifications/server') }}">Send Notification...</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-6">
 		<div class="card card-stats">
-			<div class="card-header" data-background-color="green">
-				<i class="material-icons">store</i>
-			</div>
+			<a href=" {{ url('notifications?filter=0') }}">
+				<div class="card-header" data-background-color="green">
+					<i class="material-icons">store</i>
+				</div>			
+			</a>
 			<div class="card-content">
 				<p class="category">Unread Notification</p>
-				<h3 class="title">12</h3>
+				
+				@if ($count_unread)
+					<h3 class="title">{{ $count_unread }}<small>Unread</small></h3>
+				@else
+					<h3 class="title"><small>No Record Found</small></h3>
+				@endif
+
+
 			</div>
 			<div class="card-footer">
 				<div class="stats">
-					<i class="material-icons">date_range</i> Last 24 Hours
+					<i class="material-icons">date_range</i> {{ $last_noti }}
 				</div>
 			</div>
 		</div>
@@ -49,161 +68,6 @@
 @section('content-content-blank')
 
 	<div class="row">
-	<div class="col-lg-6 col-md-12">
-		<div class="card card-nav-tabs">
-			<div class="card-header" data-background-color="purple">
-
-			
-								
-				<div class="nav-tabs-navigation">
-
-					<div class="nav-tabs-wrapper">
-						<span class="nav-tabs-title">Info:</span>
-						<ul class="nav nav-tabs" data-tabs="tabs">
-							
-							<li class="">
-								<a href="#messages" data-toggle="tab">
-									<i class="material-icons">code</i>
-									Website
-								<div class="ripple-container"></div></a>
-							</li>
-							
-						</ul>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="card-content">
-				<div class="tab-pane active" id="profile">
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" name="optionsCheckboxes" checked>
-											</label>
-										</div>
-									</td>
-									<td>Sign contract for "What are conference organizers afraid of?"</td>
-									<td class="td-actions text-right">
-										<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-											<i class="material-icons">edit</i>
-										</button>
-										<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-											<i class="material-icons">close</i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" name="optionsCheckboxes">
-											</label>
-										</div>
-									</td>
-									<td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-									<td class="td-actions text-right">
-										<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-											<i class="material-icons">edit</i>
-										</button>
-										<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-											<i class="material-icons">close</i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" name="optionsCheckboxes">
-											</label>
-										</div>
-									</td>
-									<td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-									</td>
-									<td class="td-actions text-right">
-										<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-											<i class="material-icons">edit</i>
-										</button>
-										<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-											<i class="material-icons">close</i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" name="optionsCheckboxes" checked>
-											</label>
-										</div>
-									</td>
-									<td>Create 4 Invisible User Experiences you Never Knew About</td>
-									<td class="td-actions text-right">
-										<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-											<i class="material-icons">edit</i>
-										</button>
-										<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-											<i class="material-icons">close</i>
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				
-
-			</div>
-		</div>
-	</div>
-
-	<div class="col-lg-6 col-md-12">
-		<div class="card">
-	        <div class="card-header" data-background-color="orange">
-	            <h4 class="title">Employees Stats</h4>
-	            <p class="category">New employees on 15th September, 2016</p>
-	        </div>
-	        <div class="card-content table-responsive">
-	            <table class="table table-hover">
-	                <thead class="text-warning">
-	                    <th>ID</th>
-	                	<th>Name</th>
-	                	<th>Salary</th>
-	                	<th>Country</th>
-	                </thead>
-	                <tbody>
-	                    <tr>
-	                    	<td>1</td>
-	                    	<td>Dakota Rice</td>
-	                    	<td>$36,738</td>
-	                    	<td>Niger</td>
-	                    </tr>
-	                    <tr>
-	                    	<td>2</td>
-	                    	<td>Minerva Hooper</td>
-	                    	<td>$23,789</td>
-	                    	<td>Curaçao</td>
-	                    </tr>
-	                    <tr>
-	                    	<td>3</td>
-	                    	<td>Sage Rodriguez</td>
-	                    	<td>$56,142</td>
-	                    	<td>Netherlands</td>
-	                    </tr>
-	                    <tr>
-	                    	<td>4</td>
-	                    	<td>Philip Chaney</td>
-	                    	<td>$38,735</td>
-	                    	<td>Korea, South</td>
-	                    </tr>
-	                </tbody>
-	            </table>
-	        </div>
-	    </div>
-	</div>
 	</div>
 
 @stop
