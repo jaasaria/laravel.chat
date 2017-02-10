@@ -13,11 +13,11 @@
               <a v-bind:class="{'unread-noti': !li.read_at }" :href ="'/notifications/info/' +  li.id " >{{ li.data['title'] }}</a>              
             </li>
 
-            <li v-if="all_nots_count" class="text-center" style="background-color: #f7eef7"><a href="/notifications">-- View All 
+            <li class="text-center" style="background-color: #f7eef7"><a href="/notifications">-- View All 
             --</a></li>       
 
-            <li v-else class="text-center" style="background-color: #f7eef7"><a>-- No Record Found 
-            --</a></li>       
+ <!--            <li v-else class="text-center" style="background-color: #f7eef7"><a>-- No Record Found 
+            --</a></li>      -->  
 
           
 	        </ul>
@@ -87,7 +87,6 @@
 
             },
             computed:{
-
               all_nots_count() {
                   return this.$store.getters.all_nots_count
               }

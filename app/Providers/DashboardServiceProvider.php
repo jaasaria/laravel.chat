@@ -23,11 +23,21 @@ class DashboardServiceProvider extends ServiceProvider
 
             $count_noti = Auth::user()->noti->count();
             $count_unread = Auth::user()->unreadNotifications->count();
+            
 
-            $lastMessage = Auth::user()->noti()
+         
+
+
+            if ($count_noti > 0){
+                $lastMessage = Auth::user()->noti()
                         ->orderBy('id', 'desc')->first()->created_at;
 
-            $last_noti = $lastMessage->diffForHumans();
+                $last_noti = $lastMessage->diffForHumans();    
+            }
+            else{
+                $last_noti = "No Record";    
+            }
+            
 
             $view->with(['count_noti'=>$count_noti,'count_unread'=>$count_unread,'last_noti'=>$last_noti]);
 
