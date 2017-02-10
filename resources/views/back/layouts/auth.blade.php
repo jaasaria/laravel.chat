@@ -16,9 +16,16 @@
   <link rel="stylesheet" href=" {{ asset('assets/css/material-kit.css') }} ">
 
   <style>
-  .signup-page .wrapper .card-signup {
-       margin: 25% 0 25%; 
-  }
+    .signup-page .wrapper .card-signup {
+         margin: 25% 0 25%; 
+    }
+    .foot{
+        padding: 20px;
+    }    
+    .proceed{
+      border-color: black;
+      border-style: solid;
+    }
   </style>
 
   @yield('css')
