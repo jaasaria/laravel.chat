@@ -25,10 +25,17 @@ Route::group(['middleware' => 'auth'],function(){
 });
 
 
+// Route::get('login', array('uses' => 'HomeController@showLogin'));
 
-Route::get('/', function () {
+// // route to process the form
+// Route::post('login', array('uses' => 'HomeController@doLogin'));
+
+
+
+Route::get('/', ['middleware' => 'guest', function()
+{
     return view('auth.login');
-});
+}]);
 Auth::routes();
 
 
